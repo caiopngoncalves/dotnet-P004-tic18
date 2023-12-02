@@ -8,7 +8,6 @@ public class App
 
     private void IncluirCliente()
     {
-    Console.WriteLine("===== Incluir Cliente =====");
 
     try
     {
