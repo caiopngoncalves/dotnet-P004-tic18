@@ -8,6 +8,7 @@ public class App
 
     private void IncluirCliente()
     {
+    Console.WriteLine("===== Incluir Cliente =====");
 
     try
     {
@@ -15,7 +16,12 @@ public class App
         string nome = Console.ReadLine();
 
         Console.Write("Data de Nascimento (yyyy-MM-dd): ");
-        DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
+
+        
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime dataNascimento))
+        {
+            throw new Exception("Formato de data inválido. Utilize o formato yyyy-MM-dd.");
+        }
 
         Console.Write("CPF (11 dígitos): ");
         string cpf = Console.ReadLine();
@@ -23,7 +29,7 @@ public class App
         // Verificar se o CPF já existe na base
         if (pessoas.Any(p => p is Cliente && ((Cliente)p).Cpf == cpf))
         {
-           
+            
             throw new Exception($"Ops. O CPF '{cpf}' já existe na base.");
         }
 
