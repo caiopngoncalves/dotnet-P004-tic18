@@ -8,13 +8,74 @@ public class App
 
     private void IncluirCliente()
     {
-        // Implementação para incluir um cliente
+    Console.WriteLine("===== Incluir Cliente =====");
+
+    try
+    {
+        Console.Write("Nome do Cliente: ");
+        string nome = Console.ReadLine();
+
+        Console.Write("Data de Nascimento (yyyy-MM-dd): ");
+        DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
+
+        Console.Write("CPF (11 dígitos): ");
+        string cpf = Console.ReadLine();
+
+        // Verificar se o CPF já existe na base
+        if (pessoas.Any(p => p is Cliente && ((Cliente)p).Cpf == cpf))
+        {
+            // CPF duplicado, lançar exceção
+            throw new Exception($"Ops. O CPF '{cpf}' já existe na base.");
+        }
+
+        Console.Write("Altura (em metros): ");
+        double altura = double.Parse(Console.ReadLine());
+
+        Console.Write("Peso (em quilogramas): ");
+        double peso = double.Parse(Console.ReadLine());
+
+        // Criando um novo objeto Cliente
+        Cliente novoCliente = new Cliente
+        {
+            Nome = nome,
+            DataNascimento = dataNascimento,
+            Cpf = cpf,
+            Altura = altura,
+            Peso = peso
+        };
+
+        // Adicionando o novo cliente à lista de pessoas
+        pessoas.Add(novoCliente);
+
+        Console.WriteLine("Cliente adicionado com sucesso!\n");
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao incluir cliente: {ex.Message}\n");
+    }
+}
 
     private void RemoverCliente()
     {
-        // Implementação para remover um cliente
+    Console.WriteLine("===== Remover Cliente =====");
+
+    Console.Write("Digite o CPF do cliente que deseja remover: ");
+    string cpfRemover = Console.ReadLine();
+
+    // Encontrar o cliente na lista de pessoas pelo CPF
+    Cliente clienteRemover = pessoas.OfType<Cliente>().FirstOrDefault(c => c.Cpf == cpfRemover);
+
+    if (clienteRemover != null)
+    {
+        // Remover o cliente da lista
+        pessoas.Remove(clienteRemover);
+        Console.WriteLine("Cliente removido com sucesso!\n");
     }
+    else
+    {
+        Console.WriteLine("Cliente não encontrado.\n");
+    }
+}
 
     private void IncluirTreinador()
     {
@@ -180,7 +241,7 @@ public class App
 
         do
         {
-            Console.WriteLine("===== Menu de Clientes =====");
+            Console.WriteLine("======================");
             Console.WriteLine("1. Incluir Cliente");
             Console.WriteLine("2. Remover Cliente");
             Console.WriteLine("3. Voltar");

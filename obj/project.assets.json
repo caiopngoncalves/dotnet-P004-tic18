@@ -8,24 +8,26 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Caio Philipe\\.nuget\\packages\\": {}
+    "C:\\Users\\dell\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Caio Philipe\\Desktop\\Cepedi\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
+      "projectUniqueName": "C:\\Users\\dell\\Desktop\\prova dot\\minhaprovagrupo\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
       "projectName": "dotnet-P004-tic18",
-      "projectPath": "C:\\Users\\Caio Philipe\\Desktop\\Cepedi\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
-      "packagesPath": "C:\\Users\\Caio Philipe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Caio Philipe\\Desktop\\Cepedi\\dotnet-P004-tic18\\obj\\",
+      "projectPath": "C:\\Users\\dell\\Desktop\\prova dot\\minhaprovagrupo\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
+      "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dell\\Desktop\\prova dot\\minhaprovagrupo\\dotnet-P004-tic18\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Caio Philipe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
