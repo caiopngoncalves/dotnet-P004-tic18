@@ -23,7 +23,7 @@ public class App
         // Verificar se o CPF já existe na base
         if (pessoas.Any(p => p is Cliente && ((Cliente)p).Cpf == cpf))
         {
-            // CPF duplicado, lançar exceção
+           
             throw new Exception($"Ops. O CPF '{cpf}' já existe na base.");
         }
 
@@ -43,7 +43,6 @@ public class App
             Peso = peso
         };
 
-        // Adicionando o novo cliente à lista de pessoas
         pessoas.Add(novoCliente);
 
         Console.WriteLine("Cliente adicionado com sucesso!\n");
