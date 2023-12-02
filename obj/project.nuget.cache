@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "bGr9/CFDm+WOA15AkMrtHk2QPnPOkc7rt80UOAGZTjWfwiqta5TR6QbL/9i73wkWx1iSh0PeZRm/Kyp90ZXLPw==",
+  "dgSpecHash": "zteNbbUpAdYkDaBHtuFhyF2o3FrCsE+8+0g5PwxPySi0Dg4bJRknw2U9RU8LxzrcYRv3ufmOLT4J/1Q8CDVPqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Caio Philipe\\Desktop\\Cepedi\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\cauac\\Desktop\\Residencia Workspace 2\\DotNetProvaGrupo\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cauac\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\cauac\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\cauac\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\cauac\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

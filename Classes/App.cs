@@ -28,7 +28,64 @@ public class App
 
     private void IncluirTreino()
     {
-        // Implementação para incluir um treino
+        Console.WriteLine($"CREF do treinador responsavel: ");
+        string cref = Console.ReadLine();
+        int indexTreinador = -1;
+
+        bool check = false;
+        for(int i = 0; i < pessoas.Count(); i++){
+            indexTreinador++;
+            if(pessoas[i] is Treinador){
+                if(String.Equals(pessoas[i].Cref, cref)){
+                    check = true;
+                }
+            }
+        } 
+
+        if(!check){
+            Console.WriteLine("CREF nao encontrado");
+            return;
+        }
+
+        Console.WriteLine($"Tipo: ");
+        string tipo = Console.ReadLine();
+        
+        Console.WriteLine($"Objetivo: ");
+        string objetivo = Console.ReadLine();
+        
+        Console.WriteLine($"Duracao estimada em minutos: ");
+        int duracaoEstimadaMinutos = int.Parse(Console.ReadLine());
+        
+        Console.WriteLine($"Data de inicio: ");
+        DateTime dataInicio = DateTime.Parse(Console.ReadLine());
+        
+        Console.WriteLine($"Dias ate vencimento: ");
+        int vencimentoDias = int.Parse(Console.ReadLine());
+        
+        check = false;
+        Random rnd = new Random();
+        string codigo = "";
+        do{
+            check = true;
+
+            for(int i = 0; i < 5; i++){
+                codigo += rnd.Next(0, 10).ToString();
+            }
+
+            for(int i = 0; i < App.treinos.Count(); i++){
+                if(String.Equals(App.treinos[i].Codigo, codigo)){
+                    check = false;
+                    codigo = "";
+                }
+            }
+
+        } while(!check);
+
+        List<Exercicio> listaExercicio = new List<Exercicio>();
+        List<(Cliente, int)> clientesAvaliacao = new List<(Cliente, int)>();
+
+        Treino treino = new Treino(tipo, objetivo, listaExercicio, duracaoEstimadaMinutos, dataInicio, vencimentoDias, pessoas[indexTreinador], clientesAvaliacao, codigo);
+        App.treinos.Add(treino);
     }
 
     private void RemoverTreino()
@@ -38,23 +95,182 @@ public class App
 
     private void IncluirExercicioNoTreino()
     {
-        // Implementação para incluir um exercício em um treino
+        Console.WriteLine("Codigo do treino: ");
+        string codigoTreino = Console.ReadLine();
+
+        bool check = false;
+        int indexTreino = 0;
+
+        //Procurando se o codigo de treino existe e guardando o index
+        for(int i = 0; i < App.treinos.Count(); i++){
+            if(String.Equals(App.treinos[i].Codigo, codigoTreino)){
+                check = true;
+                indexTreino = i;
+                break;
+            }
+        }
+
+        if(!check){
+            Console.WriteLine($"Codigo nao encontrado");
+            return;
+        }
+
+        if(App.treinos[indexTreino].ListaExercicios.Count() >= 10){
+            Console.WriteLine($"O treino especificado ja atingiu o numero maximo de exercicios");
+            return;
+        }
+
+        Console.WriteLine("Codigo do exercicio: ");
+        string codigoExercicio = Console.ReadLine();
+        check = false;
+        int indexExercicio = 0;
+
+        //Procurando se o codigo de exercicio existe e guardando o index
+        for(int i = 0; i < App.execicios.Count(); i++){
+            if(String.Equals(App.execicios[i].Codigo, codigoExercicio)){
+                check = true;
+                indexExercicio = i;
+                break;
+            }
+        }
+
+        if(!check){
+            Console.WriteLine($"Codigo nao encontrado");
+            return;
+        }
+
+        App.treinos[indexTreino].ListaExercicios.Add(App.execicios[indexExercicio]);
+        Console.WriteLine($"Exercicio incluido no treino com sucesso");
+        
     }
 
     private void RemoverExercicioDoTreino()
     {
-        // Implementação para remover um exercício de um treino
+        Console.WriteLine("Codigo do treino: ");
+        string codigoTreino = Console.ReadLine();
+
+        bool check = false;
+        int indexTreino = 0;
+
+        //Procurando se o codigo de treino existe e guardando o index
+        for(int i = 0; i < App.treinos.Count(); i++){
+            if(String.Equals(App.treinos[i].Codigo, codigoTreino)){
+                check = true;
+                indexTreino = i;
+                break;
+            }
+        }
+
+        if(!check){
+            Console.WriteLine($"Codigo nao encontrado");
+            return;
+        }
+
+        Console.WriteLine("Codigo do exercicio: ");
+        string codigoExercicio = Console.ReadLine();
+        check = false;
+        int indexExercicio = 0;
+
+        //Procurando se o codigo de exercicio existe e guardando o index
+        for(int i = 0; i < App.execicios.Count(); i++){
+            if(String.Equals(App.execicios[i].Codigo, codigoExercicio)){
+                check = true;
+                indexExercicio = i;
+                break;
+            }
+        }
+
+        if(!check){
+            Console.WriteLine($"Codigo nao encontrado");
+            return;
+        }
+
+        App.treinos[indexTreino].ListaExercicios.RemoveAt(indexExercicio);
+        Console.WriteLine($"Exercicio removido do treino com sucesso");
     }
 
     private void IncluirExercicio()
     {
-        // Implementação para incluir um exercício
+        Console.WriteLine($"Grupo Muscular: ");
+        string grupoMuscular = Console.ReadLine();
+
+        Console.WriteLine($"Numero de series: ");
+        int series = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"Numero de repeticoes: ");
+        int repeticoes = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"Intervalo (segundos) entre series: ");
+        int tempoIntervaloSegundos = int.Parse(Console.ReadLine());
+
+        bool check = false;
+        Random rnd = new Random();
+        string codigo = "";
+        do{
+            check = true;
+
+            for(int i = 0; i < 5; i++){
+                codigo += rnd.Next(0, 10).ToString();
+            }
+
+            for(int i = 0; i < App.execicios.Count(); i++){
+                if(String.Equals(App.execicios[i].Codigo, codigo)){
+                    check = false;
+                    codigo = "";
+                }
+            }
+
+        } while(!check);
+
+        Exercicio exercicio = new Exercicio(grupoMuscular, series, repeticoes, tempoIntervaloSegundos, codigo);
+        App.execicios.Add(exercicio);
+
+        Console.WriteLine($"Exercicio cadastrado com sucesso.");
     }
 
     private void RemoverExercicio()
     {
-        // Implementação para remover um exercício
+        Console.WriteLine($"Codigo: ");
+        string codigo = Console.ReadLine();
+
+        bool check = false;
+        int index = 0;
+
+        //Procurando se o codigo existe e guardando o index
+        for(int i = 0; i < App.execicios.Count(); i++){
+            if(String.Equals(App.execicios[i].Codigo, codigo)){
+                check = true;
+                index = i;
+                break;
+            }
+        }
+
+        if(!check){
+            Console.WriteLine($"Codigo nao encontrado");
+            return;
+        }
+
+        //Removendo o exercicio em todos os treinos em que ele faz parte
+        for(int i = 0; i < App.treinos.Count(); i++){
+            for(int j = 0; j < App.treinos[i].ListaExercicios.Count(); j++){
+                if(String.Equals(codigo, App.treinos[i].ListaExercicios[j].Codigo)){
+                    App.treinos[i].ListaExercicios.RemoveAt(j);
+                }
+            }
+        }
+
+        App.execicios.RemoveAt(index);
+        Console.WriteLine($"Exercicio removido com sucesso.");
     }
+
+    public void ListarExercicios()
+    {
+        var listaOrdenada = App.execicios.OrderBy(x => x.GrupoMuscular).ToList();
+
+        Console.WriteLine(String.Join("\n", listaOrdenada.Select(x => $"{x.Codigo} - {x.GrupoMuscular} - {x.Repeticoes} - {x.Series} - {x.TempoIntervaloSegundos}")));
+        
+    }
+
     public void RelatorioTreinadoresPorIdade()
     {
         System.Console.WriteLine("Digite um valor mínimo de idade:");
