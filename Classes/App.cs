@@ -55,7 +55,6 @@ public class App
 
     private void RemoverCliente()
     {
-    Console.WriteLine("===== Remover Cliente =====");
 
     Console.Write("Digite o CPF do cliente que deseja remover: ");
     string cpfRemover = Console.ReadLine();
