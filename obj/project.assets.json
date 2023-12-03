@@ -88,7 +88,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\cauac\\Desktop\\Residencia Workspace 2\\DotNetProvaGrupo\\dotnet-P004-tic18\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problema ao ler o arquivo de cache C:\\Users\\cauac\\Desktop\\Residencia Workspace 2\\DotNetProvaGrupo\\dotnet-P004-tic18\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'expectedPackageFiles', line 12, position 0."
     }
   ]
 }
