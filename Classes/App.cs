@@ -80,6 +80,21 @@ public class App
     }
 }
 
+private void ListarClientes()
+{
+    Console.WriteLine("===== Lista de Clientes =====");
+    
+    foreach (Pessoa p in pessoas)
+    {
+        if (p is Cliente)
+        {
+            Console.WriteLine($"Nome: {p.Nome} - Data de Nascimento: {p.DataNascimento} - Cpf: {p.Cpf}");
+        }
+    }
+
+    Console.WriteLine();
+}
+
     private void IncluirTreinador()
     {
         // Implementação para incluir um treinador
@@ -240,39 +255,44 @@ public class App
 
     private void MenuClientes()
     {
-        bool voltar = false;
+    bool voltar = false;
 
-        do
+    do
+    {
+        Console.WriteLine("===== Menu de Clientes =====");
+        Console.WriteLine("1. Incluir Cliente");
+        Console.WriteLine("2. Listar Clientes");
+        Console.WriteLine("3. Remover Cliente");
+        Console.WriteLine("4. Voltar");
+        Console.Write("Escolha uma opção (1-4): ");
+
+        string opcao = Console.ReadLine()!;
+
+        switch (opcao)
         {
-            Console.WriteLine("======================");
-            Console.WriteLine("1. Incluir Cliente");
-            Console.WriteLine("2. Remover Cliente");
-            Console.WriteLine("3. Voltar");
-            Console.Write("Escolha uma opção (1-3): ");
+            case "1":
+                Console.WriteLine("1. Incluir Cliente");
+                IncluirCliente();
+                break;
+            case "2":
+                Console.WriteLine("2. Listar Clientes");
+                ListarClientes();
+                break;
+            case "3":
+                Console.WriteLine("3. Remover Cliente");
+                RemoverCliente();
+                break;
+            case "4":
+                Console.WriteLine("4. Voltar");
+                voltar = true;
+                break;
+            default:
+                Console.WriteLine("Opção inválida. Tente novamente.");
+                break;
+        }
 
-            string opcao = Console.ReadLine()!;
-
-            switch (opcao)
-            {
-                case "1":
-                    Console.WriteLine("1. Incluir Cliente");
-                    IncluirCliente();
-                    break;
-                case "2":
-                    Console.WriteLine("2. Remover Cliente");
-                    RemoverCliente();
-                    break;
-                case "3":
-                    Console.WriteLine("3. Voltar");
-                    voltar = true;
-                    break;
-                default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
-                    break;
-            }
-
-        } while (!voltar);
-    }
+    } while (!voltar);
+}
 
     private void MenuTreinadores()
     {
