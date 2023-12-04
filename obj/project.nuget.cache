@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "8h7Feh4ZdB7rnK5O7Pp7vGdjo40MFWEuXFZKTZptXV41UwLdGi4X1AduPpN+Hb2OaUGqk39Vsk21YQmK0HUyjA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\brend\\OneDrive\\Desktop\\c#\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\brend\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\brend\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\brend\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\brend\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}
