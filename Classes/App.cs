@@ -94,6 +94,7 @@ private void ListarCliente()
 
 
 
+
     private void IncluirTreinador()
     {
         // Implementação para incluir um treinador
@@ -258,12 +259,15 @@ private void ListarCliente()
 
     do
     {
-        Console.WriteLine("===== Menu de Clientes =====");
+        Console.WriteLine("======================");
         Console.WriteLine("1. Incluir Cliente");
-        Console.WriteLine("2. Listar Clientes");
-        Console.WriteLine("3. Remover Cliente");
-        Console.WriteLine("4. Voltar");
-        Console.Write("Escolha uma opção (1-4): ");
+        Console.WriteLine("2. Remover Cliente");
+        Console.WriteLine("3. Listar Clientes");
+        Console.WriteLine("4. Incluir Treino em Cliente");
+        Console.WriteLine("5. Remover Treino em Cliente");
+        Console.WriteLine("6. Listar Treinos em Cliente");
+        Console.WriteLine("7. Voltar");
+        Console.Write("Escolha uma opção (1-7): ");
 
         string opcao = Console.ReadLine()!;
 
@@ -274,15 +278,27 @@ private void ListarCliente()
                 IncluirCliente();
                 break;
             case "2":
-                Console.WriteLine("2. Listar Clientes");
-                ListarCliente();
-                break;
-            case "3":
-                Console.WriteLine("3. Remover Cliente");
+                Console.WriteLine("2. Remover Cliente");
                 RemoverCliente();
                 break;
+            case "3":
+                Console.WriteLine("3. Listar Clientes");
+                ListarCliente();
+                break;
             case "4":
-                Console.WriteLine("4. Voltar");
+                Console.WriteLine("4. Incluir Treino em Cliente");
+                IncluirTreinoEmCliente();
+                break;
+            case "5":
+                Console.WriteLine("5. Remover Treino em Cliente");
+                RemoverTreinoEmCliente();
+                break;
+            case "6":
+                Console.WriteLine("6. Listar Treinos em Cliente");
+                ListarTreinosEmCliente();
+                break;
+            case "7":
+                Console.WriteLine("7. Voltar");
                 voltar = true;
                 break;
             default:
@@ -292,42 +308,6 @@ private void ListarCliente()
 
     } while (!voltar);
 }
-
-    private void MenuTreinadores()
-    {
-        bool voltar = false;
-
-        do
-        {
-            Console.WriteLine("===== Menu de Treinadores =====");
-            Console.WriteLine("1. Incluir Treinador");
-            Console.WriteLine("2. Remover Treinador");
-            Console.WriteLine("3. Voltar");
-            Console.Write("Escolha uma opção (1-3): ");
-
-            string opcao = Console.ReadLine()!;
-
-            switch (opcao)
-            {
-                case "1":
-                    Console.WriteLine("1. Incluir Treinador");
-                    IncluirTreinador();
-                    break;
-                case "2":
-                    Console.WriteLine("2. Remover Treinador");
-                    RemoverTreinador();
-                    break;
-                case "3":
-                    Console.WriteLine("3. Voltar");
-                    voltar = true;
-                    break;
-                default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
-                    break;
-            }
-
-        } while (!voltar);
-    }
 
     private void MenuTreinos()
     {
