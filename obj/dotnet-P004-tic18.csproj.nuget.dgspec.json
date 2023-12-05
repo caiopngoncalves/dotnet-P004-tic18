@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj": {}
+    "/home/renata-amaral-bamberg/Área de trabalho/avaliação/dotnet-P004-tic18/dotnet-P004-tic18.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj": {
+    "/home/renata-amaral-bamberg/Área de trabalho/avaliação/dotnet-P004-tic18/dotnet-P004-tic18.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
+        "projectUniqueName": "/home/renata-amaral-bamberg/Área de trabalho/avaliação/dotnet-P004-tic18/dotnet-P004-tic18.csproj",
         "projectName": "dotnet-P004-tic18",
-        "projectPath": "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
-        "packagesPath": "C:\\Users\\Renata Bamberg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\obj\\",
+        "projectPath": "/home/renata-amaral-bamberg/Área de trabalho/avaliação/dotnet-P004-tic18/dotnet-P004-tic18.csproj",
+        "packagesPath": "/home/renata-amaral-bamberg/.nuget/packages/",
+        "outputPath": "/home/renata-amaral-bamberg/Área de trabalho/avaliação/dotnet-P004-tic18/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Renata Bamberg\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/renata-amaral-bamberg/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -48,30 +48,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.114/RuntimeIdentifierGraph.json"
         }
       }
     }

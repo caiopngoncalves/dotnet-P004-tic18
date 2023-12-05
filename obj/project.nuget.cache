@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mDXSD+FePQkz/hbzscT+Caxprh/aaLG1xjSY3boPLmg8pDMg1RjoBJZCjqiW1vsAFJ7KTJ2Uy5asHD5TuGMkCw==",
+  "dgSpecHash": "NESyDr3J5rhcQDnIx05UR7ESvaR6KZSGtJPPSAMKAvxFM+7+sG03sR/iwrPujnn9/x6lK9XB3DtKoCV5F3rFog==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Renata Bamberg\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
-    "C:\\Users\\Renata Bamberg\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
-    "C:\\Users\\Renata Bamberg\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
-    "C:\\Users\\Renata Bamberg\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
-  ],
+  "projectFilePath": "/home/renata-amaral-bamberg/Área de trabalho/avaliação/dotnet-P004-tic18/dotnet-P004-tic18.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
