@@ -7,4 +7,7 @@ public class Cliente : Pessoa
     public double getImc(){
         return this.Peso / this.Altura * this.Altura;
     }
+
+private Plano PlanoAtivo;
+
 }
