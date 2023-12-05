@@ -80,20 +80,19 @@ public class App
     }
 }
 
-private void ListarClientes()
+private void ListarCliente()
 {
-    Console.WriteLine("===== Lista de Clientes =====");
-    
+    Console.WriteLine("Lista de Clientes:");
     foreach (Pessoa p in pessoas)
     {
         if (p is Cliente)
         {
-            Console.WriteLine($"Nome: {p.Nome} - Data de Nascimento: {p.DataNascimento} - Cpf: {p.Cpf}");
+            Console.WriteLine("Nome: " + p.Nome + " - Data de Nascimento: " + p.DataNascimento + " - Cpf: " + p.Cpf);
         }
     }
-
-    Console.WriteLine();
 }
+
+
 
     private void IncluirTreinador()
     {
@@ -276,7 +275,7 @@ private void ListarClientes()
                 break;
             case "2":
                 Console.WriteLine("2. Listar Clientes");
-                ListarClientes();
+                ListarCliente();
                 break;
             case "3":
                 Console.WriteLine("3. Remover Cliente");
