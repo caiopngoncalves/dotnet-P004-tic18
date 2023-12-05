@@ -8,132 +8,285 @@ public class App
 
     private void IncluirCliente()
     {
-    Console.WriteLine("===== Incluir Cliente =====");
+        Console.WriteLine("===== Incluir Cliente =====");
 
-    try
-    {
-        Console.Write("Nome do Cliente: ");
-        string nome = Console.ReadLine();
-
-        Console.Write("Data de Nascimento (yyyy-MM-dd): ");
-
-        
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime dataNascimento))
+        try
         {
-            throw new Exception("Formato de data inválido. Utilize o formato yyyy-MM-dd.");
+            Console.Write("Nome do Cliente: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Data de Nascimento (yyyy-MM-dd): ");
+
+
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime dataNascimento))
+            {
+                throw new Exception("Formato de data inválido. Utilize o formato yyyy-MM-dd.");
+            }
+
+            Console.Write("CPF (11 dígitos): ");
+            string cpf = Console.ReadLine();
+
+            if (pessoas.Any(p => p is Cliente && ((Cliente)p).Cpf == cpf))
+            {
+
+                throw new Exception($"Ops. O CPF '{cpf}' já existe na base.");
+            }
+
+            Console.Write("Altura (em metros): ");
+            double altura = double.Parse(Console.ReadLine());
+
+            Console.Write("Peso (em quilogramas): ");
+            double peso = double.Parse(Console.ReadLine());
+
+            Cliente novoCliente = new Cliente
+            {
+                Nome = nome,
+                DataNascimento = dataNascimento,
+                Cpf = cpf,
+                Altura = altura,
+                Peso = peso
+            };
+
+            pessoas.Add(novoCliente);
+
+            Console.WriteLine("Cliente adicionado com sucesso!\n");
         }
-
-        Console.Write("CPF (11 dígitos): ");
-        string cpf = Console.ReadLine();
-
-        // Verificar se o CPF já existe na base
-        if (pessoas.Any(p => p is Cliente && ((Cliente)p).Cpf == cpf))
+        catch (Exception ex)
         {
-            
-            throw new Exception($"Ops. O CPF '{cpf}' já existe na base.");
+            Console.WriteLine($"Erro ao incluir cliente: {ex.Message}\n");
         }
-
-        Console.Write("Altura (em metros): ");
-        double altura = double.Parse(Console.ReadLine());
-
-        Console.Write("Peso (em quilogramas): ");
-        double peso = double.Parse(Console.ReadLine());
-
-        // Criando um novo objeto Cliente
-        Cliente novoCliente = new Cliente
-        {
-            Nome = nome,
-            DataNascimento = dataNascimento,
-            Cpf = cpf,
-            Altura = altura,
-            Peso = peso
-        };
-
-        pessoas.Add(novoCliente);
-
-        Console.WriteLine("Cliente adicionado com sucesso!\n");
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Erro ao incluir cliente: {ex.Message}\n");
-    }
-}
 
     private void RemoverCliente()
     {
 
-    Console.Write("Digite o CPF do cliente que deseja remover: ");
-    string cpfRemover = Console.ReadLine();
+        Console.Write("Digite o CPF do cliente que deseja remover: ");
+        string cpfRemover = Console.ReadLine();
 
-    // Encontrar o cliente na lista de pessoas pelo CPF
-    Cliente clienteRemover = pessoas.OfType<Cliente>().FirstOrDefault(c => c.Cpf == cpfRemover);
+        Cliente clienteRemover = pessoas.OfType<Cliente>().FirstOrDefault(c => c.Cpf == cpfRemover);
 
-    if (clienteRemover != null)
-    {
-        // Remover o cliente da lista
-        pessoas.Remove(clienteRemover);
-        Console.WriteLine("Cliente removido com sucesso!\n");
+        if (clienteRemover != null)
+        {
+            pessoas.Remove(clienteRemover);
+            Console.WriteLine("Cliente removido com sucesso!\n");
+        }
+        else
+        {
+            Console.WriteLine("Cliente não encontrado.\n");
+        }
     }
-    else
-    {
-        Console.WriteLine("Cliente não encontrado.\n");
-    }
-}
 
     private void IncluirTreinador()
     {
-        // Implementação para incluir um treinador
+        Treinador novoTreinador = new Treinador();
+
+        Console.Write("Nome do treinador: ");
+        novoTreinador.Nome = Console.ReadLine();
+
+        Console.Write("Data de nascimento (yyyy-MM-dd): ");
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime dataNascimento))
+        {
+            novoTreinador.DataNascimento = dataNascimento;
+        }
+        else
+        {
+            Console.WriteLine("Data de nascimento inválida.");
+            return;
+        }
+
+        Console.Write("CPF (11 dígitos): ");
+        novoTreinador.Cpf = Console.ReadLine();
+
+        Console.Write("CREF: ");
+        novoTreinador.Cref = Console.ReadLine();
+
+        if (!pessoas.Contains(novoTreinador))
+        {
+            pessoas.Add(novoTreinador);
+            Console.WriteLine("Treinador incluído com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Este treinador já existe na lista.");
+        }
     }
 
     private void RemoverTreinador()
     {
-        // Implementação para remover um treinador
+        Console.Write("CPF do treinador a ser removido: ");
+        string cpf = Console.ReadLine();
+
+        Treinador treinadorParaRemover = pessoas.OfType<Treinador>().FirstOrDefault(t => t.Cpf == cpf);
+
+        if (treinadorParaRemover != null)
+        {
+            pessoas.Remove(treinadorParaRemover);
+            Console.WriteLine("Treinador removido com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Treinador não encontrado na lista.");
+        }
     }
 
     private void IncluirTreino()
     {
-        // Implementação para incluir um treino
+        Console.Write("Tipo de treino: ");
+        string tipo = Console.ReadLine();
+
+        Console.Write("Objetivo do treino: ");
+        string objetivo = Console.ReadLine();
+
+        Console.WriteLine("Exercícios disponíveis:");
+        ListarExercicio();
+
+        List<Exercicio> listaExercicios = new List<Exercicio>();
+        Console.WriteLine("Adicione exercícios ao treino (Digite 'sair' para finalizar):");
+        while (true)
+        {
+            Console.Write("Código do exercício (ou 'sair' para finalizar): ");
+            string codigoExercicio = Console.ReadLine();
+
+            if (codigoExercicio.ToLower() == "sair")
+                break;
+
+            Exercicio exercicio = execicios.FirstOrDefault(e => e.Codigo == codigoExercicio);
+
+            if (exercicio == null)
+            {
+                Console.WriteLine("Exercício não encontrado. Por favor, escolha um código válido.");
+                continue;
+            }
+
+            listaExercicios.Add(exercicio);
+        }
+
+        Console.Write("Duração estimada em minutos: ");
+        if (!int.TryParse(Console.ReadLine(), out int duracaoEstimadaMinutos))
+        {
+            Console.WriteLine("Duração inválida.");
+            return;
+        }
+
+        Console.Write("Data de início (yyyy-MM-dd): ");
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime dataInicio))
+        {
+            Console.WriteLine("Data inválida.");
+            return;
+        }
+
+        Console.Write("Vencimento em dias: ");
+        if (!int.TryParse(Console.ReadLine(), out int vencimentoDias))
+        {
+            Console.WriteLine("Número de dias inválido.");
+            return;
+        }
+
+        Console.Write("CPF do treinador responsável: ");
+        string cpfTreinador = Console.ReadLine();
+        Treinador treinadorResponsavel = pessoas.OfType<Treinador>().FirstOrDefault(t => t.Cpf == cpfTreinador);
+
+        if (treinadorResponsavel == null)
+        {
+            Console.WriteLine("Treinador não encontrado.");
+            return;
+        }
+
+        Console.Write("Código do treino (5 dígitos): ");
+        string codigo = Console.ReadLine();
+
+        Treino novoTreino = new Treino(tipo, objetivo, listaExercicios, duracaoEstimadaMinutos,
+                                       dataInicio, vencimentoDias, treinadorResponsavel, codigo);
+
+        treinos.Add(novoTreino);
+        Console.WriteLine("Treino incluído com sucesso!");
     }
 
     private void RemoverTreino()
     {
-        // Implementação para remover um treino
+        Console.Write("Código do treino a ser removido: ");
+        string codigoTreino = Console.ReadLine();
+
+        Treino treinoParaRemover = treinos.FirstOrDefault(t => t.Codigo == codigoTreino);
+
+        if (treinoParaRemover != null)
+        {
+            treinos.Remove(treinoParaRemover);
+            Console.WriteLine("Treino removido com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Treino não encontrado na lista.");
+        }
     }
+
 
     private void ListarTreino()
     {
-        // Implementação para listar todos os treinos
+        if (treinos.Count == 0)
+        {
+            Console.WriteLine("Não há treinos cadastrados.");
+            return;
+        }
+
+        Console.WriteLine("Lista de Treinos:");
+
+        foreach (var treino in treinos)
+        {
+            Console.WriteLine($"Código: {treino.Codigo}");
+            Console.WriteLine($"Tipo: {treino.Tipo}");
+            Console.WriteLine($"Objetivo: {treino.Objetivo}");
+            Console.WriteLine($"Duração Estimada: {treino.DuracaoEstimadaMinutos} minutos");
+            Console.WriteLine($"Data de Início: {treino.DataInicio:yyyy-MM-dd}");
+            Console.WriteLine($"Vencimento em: {treino.VencimentoDias} dias");
+            Console.WriteLine($"Treinador Responsável: {treino.TreinadorResponsavel.Nome}");
+
+            Console.WriteLine("Exercícios:");
+            foreach (var exercicio in treino.ListaExercicios)
+            {
+                Console.WriteLine($"- {exercicio.GrupoMuscular}");
+            }
+
+            Console.WriteLine("Clientes para Avaliação:");
+            foreach (var (cliente, nota) in treino.ClientesAvaliacao)
+            {
+                Console.WriteLine($"- Cliente: {cliente.Nome}, Nota: {nota}");
+            }
+
+            Console.WriteLine("-----");
+        }
     }
 
     private void IncluirExercicioNoTreino()
     {
-        //Puxando codigo do treino e vendo se a entrada e valida
         Console.WriteLine("Codigo do treino: ");
         string codigoTreino = Console.ReadLine();
-        if(codigoTreino.Length != 5 || !int.TryParse(codigoTreino, out _))
+        if (codigoTreino.Length != 5 || !int.TryParse(codigoTreino, out _))
         {
             Console.WriteLine($"Erro: o codigo precisa ser 5 caracteres numericos");
             return;
         }
 
-        //Procurando se o codigo de treino existe e guardando o index
         bool check = false;
         int indexTreino = 0;
-        for(int i = 0; i < App.treinos.Count(); i++){
-            if(String.Equals(App.treinos[i].Codigo, codigoTreino)){
+        for (int i = 0; i < treinos.Count(); i++)
+        {
+            if (String.Equals(treinos[i].Codigo, codigoTreino))
+            {
                 check = true;
                 indexTreino = i;
                 break;
             }
         }
 
-        if(!check){
+        if (!check)
+        {
             Console.WriteLine($"Codigo nao encontrado");
             return;
         }
 
-        //Vendo se o treino ja atingiu o maximo de exercicios
-        if(App.treinos[indexTreino].ListaExercicios.Count() >= 10){
+        if (treinos[indexTreino].ListaExercicios.Count() >= 10)
+        {
             Console.WriteLine($"O treino especificado ja atingiu o numero maximo de exercicios");
             return;
         }
@@ -142,24 +295,26 @@ public class App
         //Puxando codigo do treino e vendo se a entrada e valida
         Console.WriteLine("Codigo do exercicio: ");
         string codigoExercicio = Console.ReadLine();
-        if(codigoExercicio.Length != 5 || !int.TryParse(codigoExercicio, out _))
+        if (codigoExercicio.Length != 5 || !int.TryParse(codigoExercicio, out _))
         {
             Console.WriteLine($"Erro: o codigo precisa ser 5 caracteres numericos");
             return;
         }
 
-        //Procurando se o codigo de exercicio existe e guardando o index
         check = false;
         int indexExercicio = 0;
-        for(int i = 0; i < App.execicios.Count(); i++){
-            if(String.Equals(App.execicios[i].Codigo, codigoExercicio)){
+        for (int i = 0; i < execicios.Count(); i++)
+        {
+            if (String.Equals(App.execicios[i].Codigo, codigoExercicio))
+            {
                 check = true;
                 indexExercicio = i;
                 break;
             }
         }
 
-        if(!check){
+        if (!check)
+        {
             Console.WriteLine($"Codigo nao encontrado");
             return;
         }
@@ -170,50 +325,52 @@ public class App
 
     private void RemoverExercicioDoTreino()
     {
-        //Puxando codigo do treino e vendo se a entrada e valida
         Console.WriteLine("Codigo do treino: ");
         string codigoTreino = Console.ReadLine();
-        if(codigoTreino.Length != 5 || !int.TryParse(codigoTreino, out _))
+        if (codigoTreino.Length != 5 || !int.TryParse(codigoTreino, out _))
         {
             Console.WriteLine($"Erro: o codigo precisa ser 5 caracteres numericos");
             return;
         }
 
-        //Procurando se o codigo de treino existe e guardando o index
         bool check = false;
         int indexTreino = 0;
-        for(int i = 0; i < App.treinos.Count(); i++){
-            if(String.Equals(App.treinos[i].Codigo, codigoTreino)){
+        for (int i = 0; i < App.treinos.Count(); i++)
+        {
+            if (String.Equals(App.treinos[i].Codigo, codigoTreino))
+            {
                 check = true;
                 indexTreino = i;
                 break;
             }
         }
-        if(!check){
+        if (!check)
+        {
             Console.WriteLine($"Codigo nao encontrado");
             return;
         }
 
-        //Puxando codigo do treino e vendo se a entrada e valida
         Console.WriteLine("Codigo do exercicio: ");
         string codigoExercicio = Console.ReadLine();
-        if(codigoExercicio.Length != 5 || !int.TryParse(codigoExercicio, out _))
+        if (codigoExercicio.Length != 5 || !int.TryParse(codigoExercicio, out _))
         {
             Console.WriteLine($"Erro: o codigo precisa ser 5 caracteres numericos");
             return;
         }
 
-        //Procurando se o codigo de exercicio existe e guardando o index
         check = false;
         int indexExercicio = 0;
-        for(int i = 0; i < App.execicios.Count(); i++){
-            if(String.Equals(App.execicios[i].Codigo, codigoExercicio)){
+        for (int i = 0; i < App.execicios.Count(); i++)
+        {
+            if (String.Equals(App.execicios[i].Codigo, codigoExercicio))
+            {
                 check = true;
                 indexExercicio = i;
                 break;
             }
         }
-        if(!check){
+        if (!check)
+        {
             Console.WriteLine($"Codigo nao encontrado");
             return;
         }
@@ -224,51 +381,132 @@ public class App
 
     private void ListarExercicioNoTreino()
     {
-        //Puxando codigo do treino e vendo se a entrada e valida
         Console.WriteLine("Codigo do treino: ");
         string codigoTreino = Console.ReadLine();
-        if(codigoTreino.Length != 5 || !int.TryParse(codigoTreino, out _))
+        if (codigoTreino.Length != 5 || !int.TryParse(codigoTreino, out _))
         {
             Console.WriteLine($"Erro: o codigo precisa ser 5 caracteres numericos");
             return;
         }
-
-        //Procurando se o codigo de treino existe e guardando o index
         bool check = false;
         int indexTreino = 0;
-        for(int i = 0; i < App.treinos.Count(); i++){
-            if(String.Equals(App.treinos[i].Codigo, codigoTreino)){
+        for (int i = 0; i < App.treinos.Count(); i++)
+        {
+            if (String.Equals(App.treinos[i].Codigo, codigoTreino))
+            {
                 check = true;
                 indexTreino = i;
                 break;
             }
         }
-        if(!check){
+        if (!check)
+        {
             Console.WriteLine($"Codigo nao encontrado");
             return;
         }
 
-        //Criando lista ordenada a partir do grupo muscular e listando
         var listaOrdenada = App.treinos[indexTreino].ListaExercicios.OrderBy(x => x.GrupoMuscular).ToList();
-        Console.WriteLine(String.Join("\n", listaOrdenada.Select(x => $"{x.Codigo} - {x.GrupoMuscular} - {x.Repeticoes} - {x.Series} - {x.TempoIntervaloSegundos}")));  
+        Console.WriteLine(String.Join("\n", listaOrdenada.Select(x => $"{x.Codigo} - {x.GrupoMuscular} - {x.Repeticoes} - {x.Series} - {x.TempoIntervaloSegundos}")));
+    }
+
+
+
+    private void RelacionarClienteTreino()
+    {
+        if (treinos.Count == 0)
+        {
+            Console.WriteLine("Não há treinos cadastrados.");
+            return;
+        }
+
+        if (pessoas.OfType<Cliente>().Count() == 0)
+        {
+            Console.WriteLine("Não há clientes cadastrados.");
+            return;
+        }
+
+        Console.WriteLine("Lista de Treinos:");
+        foreach (var treino in treinos)
+        {
+            Console.WriteLine($"Código: {treino.Codigo} - Tipo: {treino.Tipo}");
+            Console.WriteLine("-----");
+        }
+
+        Console.Write("Digite o código do treino: ");
+        string codigoTreino = Console.ReadLine();
+
+        Treino treinoRelacionarCliente = treinos.FirstOrDefault(t => t.Codigo == codigoTreino);
+
+        if (treinoRelacionarCliente == null)
+        {
+            Console.WriteLine("Treino não encontrado na lista.");
+            return;
+        }
+
+        Console.WriteLine("Lista de Clientes:");
+        foreach (var cliente in pessoas.OfType<Cliente>())
+        {
+            Console.WriteLine($"CPF: {cliente.Cpf}, Nome: {cliente.Nome}");
+            Console.WriteLine("-----");
+        }
+
+        Console.Write("Digite o CPF do cliente: ");
+        string cpfCliente = Console.ReadLine();
+
+        Cliente clienteRelacionar = pessoas.OfType<Cliente>().FirstOrDefault(c => c.Cpf == cpfCliente);
+
+        if (clienteRelacionar == null)
+        {
+            Console.WriteLine("Cliente não encontrado na lista.");
+            return;
+        }
+
+        if (treinoRelacionarCliente.ClientesAvaliacao.Count(c => c.Item1 == clienteRelacionar) >= 2)
+        {
+            Console.WriteLine("Este cliente já está associado a 2 treinos. Não é possível adicionar mais.");
+            return;
+        }
+        Console.Write("Data de início do treino (yyyy-MM-dd): ");
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime dataInicio))
+        {
+            Console.WriteLine("Data inválida.");
+            return;
+        }
+
+        Console.Write("Vencimento do treino em dias: ");
+        if (!int.TryParse(Console.ReadLine(), out int vencimentoDias))
+        {
+            Console.WriteLine("Número de dias inválido.");
+            return;
+        }
+
+        Console.Write("Avaliação do cliente (0 a 10): ");
+        if (!int.TryParse(Console.ReadLine(), out int avaliacao))
+        {
+            Console.WriteLine("Avaliação inválida.");
+            return;
+        }
+
+        treinoRelacionarCliente.ClientesAvaliacao.Add((clienteRelacionar, avaliacao));
+        Console.WriteLine("Cliente relacionado ao treino com sucesso!");
     }
 
     private void IncluirExercicio()
     {
-        //Tratando string do grupo muscular
         Console.WriteLine($"Grupo Muscular: ");
         string grupoMuscular = Console.ReadLine();
-        if(grupoMuscular == ""){
+        if (grupoMuscular == "")
+        {
             Console.WriteLine("Erro: Nao e permitida entrada vazia de dados");
             return;
         }
 
-        //Tratando a entrada dos ints
         int series = 0;
         int repeticoes = 0;
         int tempoIntervaloSegundos = 0;
 
-        try{
+        try
+        {
             Console.WriteLine($"Numero de series: ");
             series = int.Parse(Console.ReadLine());
 
@@ -277,91 +515,96 @@ public class App
 
             Console.WriteLine($"Intervalo (segundos) entre series: ");
             tempoIntervaloSegundos = int.Parse(Console.ReadLine());
-        } 
-        catch {
+        }
+        catch
+        {
             Console.WriteLine($"Erro: entrada de numero invalida");
             return;
         }
 
-        //Checando se os ints nao sao negativos ou nulos
-        if(series <= 0 || repeticoes <= 0 || tempoIntervaloSegundos <= 0){
+        if (series <= 0 || repeticoes <= 0 || tempoIntervaloSegundos <= 0)
+        {
             Console.WriteLine($"Erro: Nao sao permitidos numeros nulos ou negativos como resposta");
             return;
         }
 
-        //Criando um codigo aleatorio
         bool check = false;
         Random rnd = new Random();
         string codigo = "";
-        do{
+        do
+        {
             check = true;
 
-            for(int i = 0; i < 5; i++){
+            for (int i = 0; i < 5; i++)
+            {
                 codigo += rnd.Next(0, 10).ToString();
             }
 
-            for(int i = 0; i < App.execicios.Count(); i++){
-                if(String.Equals(App.execicios[i].Codigo, codigo)){
+            for (int i = 0; i < App.execicios.Count(); i++)
+            {
+                if (String.Equals(App.execicios[i].Codigo, codigo))
+                {
                     check = false;
                     codigo = "";
                 }
             }
 
-        } while(!check);
+        } while (!check);
 
-        //Criando exercicio e passando pra lista
         Exercicio exercicio = new Exercicio(grupoMuscular, series, repeticoes, tempoIntervaloSegundos, codigo);
-        App.execicios.Add(exercicio);
+        execicios.Add(exercicio);
 
         Console.WriteLine($"Exercicio cadastrado com sucesso.");
     }
 
     private void RemoverExercicio()
     {
-        //Puxando codigo do treino e vendo se a entrada e valida
         Console.WriteLine($"Codigo: ");
         string codigo = Console.ReadLine();
-        if(codigo.Length != 5 || !int.TryParse(codigo, out _))
+        if (codigo.Length != 5 || !int.TryParse(codigo, out _))
         {
             Console.WriteLine($"Erro: o codigo precisa ser 5 caracteres numericos");
             return;
         }
 
-        //Procurando se o codigo existe e guardando o index
         bool check = false;
         int index = 0;
-        for(int i = 0; i < App.execicios.Count(); i++){
-            if(String.Equals(App.execicios[i].Codigo, codigo)){
+        for (int i = 0; i < execicios.Count(); i++)
+        {
+            if (String.Equals(execicios[i].Codigo, codigo))
+            {
                 check = true;
                 index = i;
                 break;
             }
         }
-        if(!check){
+        if (!check)
+        {
             Console.WriteLine($"Codigo nao encontrado");
             return;
         }
 
-        //Removendo o exercicio em todos os treinos em que ele faz parte
-        for(int i = 0; i < App.treinos.Count(); i++){
-            for(int j = 0; j < App.treinos[i].ListaExercicios.Count(); j++){
-                if(String.Equals(codigo, App.treinos[i].ListaExercicios[j].Codigo)){
-                    App.treinos[i].ListaExercicios.RemoveAt(j);
+        for (int i = 0; i < treinos.Count(); i++)
+        {
+            for (int j = 0; j < treinos[i].ListaExercicios.Count(); j++)
+            {
+                if (String.Equals(codigo, treinos[i].ListaExercicios[j].Codigo))
+                {
+                    treinos[i].ListaExercicios.RemoveAt(j);
                 }
             }
         }
 
-        //Removendo da lista principal
-        App.execicios.RemoveAt(index);
+        execicios.RemoveAt(index);
         Console.WriteLine($"Exercicio removido com sucesso.");
     }
 
-    public void ListarExercicio()
+    private void ListarExercicio()
     {
-        //Criando lista ordenada a partir do grupo muscular e listando
-        var listaOrdenada = App.execicios.OrderBy(x => x.GrupoMuscular).ToList();
-        Console.WriteLine(String.Join("\n", listaOrdenada.Select(x => $"{x.Codigo} - {x.GrupoMuscular} - {x.Repeticoes} - {x.Series} - {x.TempoIntervaloSegundos}")));
-        
+        foreach (var exercicio in execicios)
+        {
+            Console.WriteLine($"Código: {exercicio.Codigo}, Nome: {exercicio.GrupoMuscular}");
+        }
     }
 
     public void RelatorioTreinadoresPorIdade()
@@ -465,7 +708,34 @@ public class App
 
     private void RelatorioTreinosPorDiasAteVencimento()
     {
-        // Implementação do relatório
+        Console.Write("Digite o número de dias limite para o vencimento: ");
+        if (!int.TryParse(Console.ReadLine(), out int diasLimite))
+        {
+            Console.WriteLine("Número inválido de dias.");
+            return;
+        }
+
+        var treinosFiltrados = treinos
+            .Where(t => (t.DataInicio.AddDays(t.VencimentoDias) - DateTime.Now).Days <= diasLimite)
+            .OrderBy(t => (t.DataInicio.AddDays(t.VencimentoDias) - DateTime.Now).Days);
+
+        Console.WriteLine($"Relatório de Treinos com Vencimento em até {diasLimite} dias:");
+
+        foreach (var treino in treinosFiltrados)
+        {
+            int diasAteVencimento = (treino.DataInicio.AddDays(treino.VencimentoDias) - DateTime.Now).Days;
+
+            Console.WriteLine($"Código: {treino.Codigo}");
+            Console.WriteLine($"Tipo: {treino.Tipo}");
+            Console.WriteLine($"Data de Início: {treino.DataInicio:yyyy-MM-dd}");
+            Console.WriteLine($"Vencimento em: {diasAteVencimento} dias");
+            Console.WriteLine("-----");
+        }
+
+        if (!treinosFiltrados.Any())
+        {
+            Console.WriteLine("Nenhum treino encontrado com vencimento dentro do prazo especificado.");
+        }
     }
 
     private void RelatorioTreinadoresPorMediaNotas()
@@ -568,8 +838,9 @@ public class App
             Console.WriteLine("4. Incluir Exercício no Treino");
             Console.WriteLine("5. Remover Exercício do Treino");
             Console.WriteLine("6. Listar Exercícios em um Treino");
-            Console.WriteLine("7. Voltar");
-            Console.Write("Escolha uma opção (1-7): ");
+            Console.WriteLine("7. Incluir cliente em um treino");
+            Console.WriteLine("8. Voltar");
+            Console.Write("Escolha uma opção (1-9):");
 
             string opcao = Console.ReadLine()!;
 
@@ -600,7 +871,11 @@ public class App
                     ListarExercicioNoTreino();
                     break;
                 case "7":
-                    Console.WriteLine("7. Voltar");
+                    Console.WriteLine("7. Incluir cliente em um treino");
+                    RelacionarClienteTreino();
+                    break;
+                case "8":
+                    Console.WriteLine("8. Voltar");
                     voltar = true;
                     break;
                 default:

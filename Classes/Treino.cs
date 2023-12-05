@@ -19,7 +19,8 @@ public class Treino
             {
                 _codigo = value;
             }
-            else{
+            else
+            {
                 throw new ArgumentException("Codigo deve conter 5 dígitos!");
             }
         }
@@ -27,8 +28,7 @@ public class Treino
 
     // Construtor
     public Treino(string tipo, string objetivo, List<Exercicio> listaExercicios, int duracaoEstimadaMinutos,
-                  DateTime dataInicio, int vencimentoDias, Treinador treinadorResponsavel,
-                  List<(Cliente, int)> clientesAvaliacao, string codigo)
+                  DateTime dataInicio, int vencimentoDias, Treinador treinadorResponsavel, string codigo)
     {
         Tipo = tipo;
         Objetivo = objetivo;
@@ -37,7 +37,7 @@ public class Treino
         DataInicio = dataInicio;
         VencimentoDias = vencimentoDias;
         TreinadorResponsavel = treinadorResponsavel;
-        ClientesAvaliacao = clientesAvaliacao;
+        ClientesAvaliacao = new List<(Cliente, int)>();
         Codigo = codigo;
     }
 }
