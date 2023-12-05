@@ -4,7 +4,8 @@ public class App
     private List<Pessoa> pessoas = new List<Pessoa>();
     static List<Treino> treinos = new List<Treino>();
     static List<Exercicio> execicios = new List<Exercicio>();
-
+    static List<Plano> planos = new List<Plano>();
+    
 
     private void IncluirCliente()
     {
@@ -654,6 +655,72 @@ public class App
 
             
     }
+
+    private void IncluirPlano()
+    {
+        Console.WriteLine($"Titulo do plano: ");
+        string titulo = Console.ReadLine();
+        if (titulo == "")
+        {
+            Console.WriteLine("Erro: Nao e permitida entrada vazia de dados");
+            return;
+        }
+
+        int valorMensal = 0;
+        try
+        {
+            Console.WriteLine($"Valor mensal: ");
+            valorMensal = int.Parse(Console.ReadLine());
+        }
+        catch
+        {
+            Console.WriteLine($"Erro: entrada de numero invalida");
+            return;
+        }
+
+        if (valorMensal <= 0)
+        {
+            Console.WriteLine($"Erro: Nao sao permitidos numeros nulos como resposta");
+            return;
+        }
+
+        Plano plano = new Plano(titulo, valorMensal);
+        planos.Add(plano);
+
+        Console.WriteLine($"Plano cadastrado com sucesso.");
+    }
+
+    private void RemoverPlano()
+    {
+        Console.WriteLine($"Titulo do plano: ");
+        string titulo = Console.ReadLine();
+        if (titulo == "")
+        {
+            Console.WriteLine("Erro: Nao e permitida entrada vazia de dados");
+            return;
+        }
+
+        bool check = false;
+        int index = 0;
+        for (int i = 0; i < planos.Count(); i++)
+        {
+            if (String.Equals(planos[i].Titulo, titulo))
+            {
+                check = true;
+                index = i;
+                break;
+            }
+        }
+        if (!check)
+        {
+            Console.WriteLine($"Codigo nao encontrado");
+            return;
+        }
+
+        planos.RemoveAt(index);
+        Console.WriteLine($"Plano removido com sucesso.");
+    }
+
     public void RelatorioTreinadoresPorIdade()
     {
         System.Console.WriteLine("Digite um valor mínimo de idade:");
@@ -1153,11 +1220,11 @@ public class App
             {
                 case "1":
                     Console.WriteLine("1. Cadastrando plano");
-                    //RelatorioTreinadoresPorIdade();
+                    IncluirPlano();
                     break;
                 case "2":
                     Console.WriteLine("2. Removendo plano");
-                   // RelatorioClientesPorIdade();
+                    RemoverPlano();
                     break;
                 case "3":
                     Console.WriteLine("3. Voltar");
