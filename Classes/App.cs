@@ -782,11 +782,55 @@ public class App
             .Where(treino => treino.Objetivo.Contains(palavraChave, StringComparison.OrdinalIgnoreCase));
 
         Console.WriteLine($"Relatório de Treinos com Objetivo contendo '{palavraChave}':");
+        foreach (var treino in treinosComObjetivo)
+        {
+            Console.WriteLine($"Código: {treino.Codigo}");
+            Console.WriteLine($"Tipo: {treino.Tipo}");
+            Console.WriteLine($"Objetivo: {treino.Objetivo}");
+            Console.WriteLine("-----");
+        }
+
+        if (!treinosComObjetivo.Any())
+        {
+            Console.WriteLine($"Nenhum treino encontrado com objetivo contendo '{palavraChave}'.");
+        }
     }
 
     private void RelatorioTop10Exercicios()
     {
-        // Implementação do relatório
+        var exercicioFrequencia = new Dictionary<string, int>();
+
+        foreach (var treino in treinos)
+        {
+            foreach (var exercicio in treino.ListaExercicios)
+            {
+                if (exercicioFrequencia.ContainsKey(exercicio.GrupoMuscular))
+                {
+                    exercicioFrequencia[exercicio.GrupoMuscular]++;
+                }
+                else
+                {
+                    exercicioFrequencia[exercicio.GrupoMuscular] = 1;
+                }
+            }
+        }
+        var topExercicios = exercicioFrequencia
+            .OrderByDescending(pair => pair.Value)
+            .Take(10);
+
+        Console.WriteLine("Relatório dos Top 10 Exercícios mais Utilizados:");
+
+        foreach (var exercicio in topExercicios)
+        {
+            Console.WriteLine($"Exercício: {exercicio.Key}");
+            Console.WriteLine($"Frequência: {exercicio.Value} vezes");
+            Console.WriteLine("-----");
+        }
+
+        if (!topExercicios.Any())
+        {
+            Console.WriteLine("Nenhum exercício encontrado nos treinos.");
+        }
     }
 
     private void MenuClientes()

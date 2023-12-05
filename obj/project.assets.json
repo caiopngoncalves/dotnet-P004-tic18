@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Caio Philipe\\.nuget\\packages\\": {}
+    "C:\\Users\\Renata Bamberg\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Caio Philipe\\Desktop\\Cepedi\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
+      "projectUniqueName": "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
       "projectName": "dotnet-P004-tic18",
-      "projectPath": "C:\\Users\\Caio Philipe\\Desktop\\Cepedi\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
-      "packagesPath": "C:\\Users\\Caio Philipe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Caio Philipe\\Desktop\\Cepedi\\dotnet-P004-tic18\\obj\\",
+      "projectPath": "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\dotnet-P004-tic18.csproj",
+      "packagesPath": "C:\\Users\\Renata Bamberg\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Renata Bamberg\\Desktop\\avaliação\\dotnet-P004-tic18\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Caio Philipe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Renata Bamberg\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -54,12 +54,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.14, 7.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[7.0.14, 7.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[7.0.14, 7.0.14]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[7.0.14, 7.0.14]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
