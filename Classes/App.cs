@@ -140,8 +140,68 @@ private void IncluirTreinoEmCliente()
         Console.WriteLine($"Erro ao incluir treino em cliente: {ex.Message}\n");
     }
 }
+private void RemoverTreinoEmCliente()
+{
+    Console.WriteLine("===== Remover Treino de Cliente =====");
 
+    try
+    {
+        // Listar os clientes disponíveis
+        Console.WriteLine("Lista de Clientes:");
+        ListarCliente();
 
+        // Solicitar ao usuário escolher um cliente
+        Console.Write("Digite o CPF do cliente: ");
+        string cpfCliente = Console.ReadLine();
+
+        // Buscar o cliente na lista de pessoas
+        Cliente clienteSelecionado = pessoas.OfType<Cliente>().FirstOrDefault(c => c.Cpf == cpfCliente);
+
+        if (clienteSelecionado == null)
+        {
+            Console.WriteLine("Cliente não encontrado.\n");
+            return;
+        }
+
+        // Listar os treinos disponíveis para remoção do cliente
+        Console.WriteLine($"Lista de Treinos do Cliente {clienteSelecionado.Nome}:");
+        ListarTreinosDoCliente(clienteSelecionado);
+
+        // Solicitar ao usuário escolher um treino associado ao cliente para remoção
+        Console.Write("Digite o tipo do treino a ser removido: ");
+        string tipoTreinoRemover = Console.ReadLine();
+
+        // Buscar o treino na lista de treinos
+        Treino treinoRemover = treinos.FirstOrDefault(t => t.Tipo == tipoTreinoRemover);
+
+        if (treinoRemover == null)
+        {
+            Console.WriteLine($"Treino não encontrado.\n");
+            return;
+        }
+
+        // Remover o cliente do treino
+        treinoRemover.ClientesAvaliacao.RemoveAll(c => c.Item1 == clienteSelecionado);
+
+        Console.WriteLine($"Cliente removido do treino com sucesso!\n");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao remover treino de cliente: {ex.Message}\n");
+    }
+}
+
+private void ListarTreinosDoCliente(Cliente cliente)
+{
+    foreach (Treino treino in treinos)
+    {
+        // Verificar se o cliente está associado ao treino
+        if (treino.ClientesAvaliacao.Any(c => c.Item1 == cliente))
+        {
+            Console.WriteLine($"Tipo: {treino.Tipo} - Objetivo: {treino.Objetivo}");
+        }
+    }
+}
     private void IncluirTreinador()
     {
         // Implementação para incluir um treinador
@@ -342,7 +402,7 @@ private void IncluirTreinoEmCliente()
                 break;
             case "6":
                 Console.WriteLine("6. Listar Treinos em Cliente");
-                ListarTreinosEmCliente();
+                ListarTreinosDoCliente();
                 break;
             case "7":
                 Console.WriteLine("7. Voltar");
