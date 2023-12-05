@@ -91,8 +91,55 @@ private void ListarCliente()
         }
     }
 }
+private void IncluirTreinoEmCliente()
+{
+    Console.WriteLine("===== Incluir Treino em Cliente =====");
 
+    try
+    {
+        // Listar os clientes disponíveis
+        Console.WriteLine("Lista de Clientes:");
+        ListarCliente();
 
+        // Solicitar ao usuário escolher um cliente
+        Console.Write("Digite o CPF do cliente: ");
+        string cpfCliente = Console.ReadLine();
+
+        // Buscar o cliente na lista de pessoas
+        Cliente clienteSelecionado = pessoas.OfType<Cliente>().FirstOrDefault(c => c.Cpf == cpfCliente);
+
+        if (clienteSelecionado == null)
+        {
+            Console.WriteLine("Cliente não encontrado.\n");
+            return;
+        }
+
+        // Listar os treinos disponíveis
+        Console.WriteLine("Lista de Treinos:");
+        ListarTreino()
+;
+        Console.Write("Digite o tipo do treino existente: ");
+        string tipoTreinoExistente = Console.ReadLine();
+
+        
+        Treino treinoExistente = treinos.FirstOrDefault(t => t.Tipo == tipoTreinoExistente);
+
+        if (treinoExistente == null)
+        {
+            Console.WriteLine("Treino não encontrado.\n");
+            return;
+        }
+
+        // Adicionar o cliente ao treino existente
+        treinoExistente.ClientesAvaliacao.Add((clienteSelecionado, 0)); // 0 é uma avaliação padrão
+
+        Console.WriteLine("Cliente adicionado ao treino com sucesso!\n");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao incluir treino em cliente: {ex.Message}\n");
+    }
+}
 
 
     private void IncluirTreinador()
