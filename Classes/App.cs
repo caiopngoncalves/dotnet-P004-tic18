@@ -195,7 +195,7 @@ private void ListarTreinosDoCliente(Cliente cliente)
 {
     foreach (Treino treino in treinos)
     {
-        // Verificar se o cliente está associado ao treino
+        
         if (treino.ClientesAvaliacao.Any(c => c.Item1 == cliente))
         {
             Console.WriteLine($"Tipo: {treino.Tipo} - Objetivo: {treino.Objetivo}");
