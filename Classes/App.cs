@@ -740,12 +740,48 @@ public class App
 
     private void RelatorioTreinadoresPorMediaNotas()
     {
-        // Implementação do relatório
+      var treinadores = pessoas.OfType<Treinador>();
+
+        Console.WriteLine("Relatório de Treinadores Ordenados por Média de Notas dos Treinos:");
+
+        foreach (var treinador in treinadores)
+        {
+            var treinosDoTreinador = treinos.Where(treino => treino.TreinadorResponsavel == treinador && treino.ClientesAvaliacao.Any());
+
+            if (treinosDoTreinador.Any())
+            {
+                var mediaNotasTreinos = treinosDoTreinador.Average(treino => treino.ClientesAvaliacao.Average(avaliacao => avaliacao.Item2));
+
+                Console.WriteLine($"Nome: {treinador.Nome}");
+                Console.WriteLine($"Média de Notas dos Treinos: {mediaNotasTreinos}");
+                Console.WriteLine("-----");
+            }
+        }
+
+        var treinadoresSemTreinos = treinadores.Where(treinador => !treinos.Any(treino => treino.TreinadorResponsavel == treinador));
+
+        foreach (var treinadorSemTreinos in treinadoresSemTreinos)
+        {
+            Console.WriteLine($"Nome: {treinadorSemTreinos.Nome}");
+            Console.WriteLine($"Média de Notas dos Treinos: Nenhum treino encontrado");
+            Console.WriteLine("-----");
+        }
+
+        if (!treinadores.Any())
+        {
+            Console.WriteLine("Nenhum treinador encontrado.");
+        }
     }
 
     private void RelatorioTreinosPorObjetivo()
     {
-        // Implementação do relatório
+        Console.Write("Digite a palavra-chave do objetivo: ");
+        string palavraChave = Console.ReadLine();
+
+        var treinosComObjetivo = treinos
+            .Where(treino => treino.Objetivo.Contains(palavraChave, StringComparison.OrdinalIgnoreCase));
+
+        Console.WriteLine($"Relatório de Treinos com Objetivo contendo '{palavraChave}':");
     }
 
     private void RelatorioTop10Exercicios()
