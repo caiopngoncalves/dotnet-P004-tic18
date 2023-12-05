@@ -6,7 +6,8 @@ public class App
     static List<Exercicio> execicios = new List<Exercicio>();
 
 
-    private void IncluirCliente()  
+    private void IncluirCliente() 
+    {
     Console.WriteLine("===== Incluir Cliente =====");
 
     try
