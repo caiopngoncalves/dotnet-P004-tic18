@@ -1083,6 +1083,43 @@ public class App
         } while (!voltar);
     }
 
+    public void MenuPlanos()
+    {
+        bool voltar = false;
+
+        do
+        {
+            Console.WriteLine("===== Menu de Planos =====");
+            Console.WriteLine("1. Cadastrar plano");
+            Console.WriteLine("2. Remover plano");
+            Console.WriteLine("3. Voltar");
+            Console.Write("Escolha uma opção (1-3): ");
+
+            string opcao = Console.ReadLine()!;
+
+            switch (opcao)
+            {
+                case "1":
+                    Console.WriteLine("1. Cadastrando plano");
+                    //RelatorioTreinadoresPorIdade();
+                    break;
+                case "2":
+                    Console.WriteLine("2. Removendo plano");
+                   // RelatorioClientesPorIdade();
+                    break;
+                case "3":
+                    Console.WriteLine("3. Voltar");
+                    voltar = true;
+                    break;
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    break;
+            }
+
+        } while (!voltar);
+    }
+
+
     public void Executar()
     {
 
