@@ -1,5 +1,5 @@
 namespace Namespace;
-public class PagamentoPix
+public class PagamentoPix : IPagamento
 {
     public string Descricao { get; set; }
     public double ValorBruto { get; set; }

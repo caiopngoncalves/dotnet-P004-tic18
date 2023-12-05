@@ -606,7 +606,54 @@ public class App
             Console.WriteLine($"Código: {exercicio.Codigo}, Nome: {exercicio.GrupoMuscular}");
         }
     }
+ 
+ private void Pagamento()
+    {
+        
+        Console.WriteLine("===== Incluir Pagamento =====");
+            Console.WriteLine("Digite o CPF do clinete que vai pagar:");
+            string CPF = Console.ReadLine();
+             Cliente cliente = pessoas.OfType<Cliente>().FirstOrDefault(c => c.Cpf == CPF);
+            Console.Write("Qual o tipo metodo de pagamento? ");
+            Console.Write(" 1 - pix, 2-cartao");
+            int opçao = int.Parse(Console.ReadLine());
 
+            if(opçao==1){
+
+                PagamentoPix Pagamento= new PagamentoPix();
+                Console.Write(" Digite uma descriçao");
+                string descricao = Console.ReadLine();
+                Console.Write(" Digite o Valor ");
+                double valorbruto = double.Parse(Console.ReadLine());
+                Console.Write(" Digite o Desconto ");
+                double desconto = double.Parse(Console.ReadLine());
+                DateTime date = DateTime.Now;
+                Pagamento.Descricao=descricao;
+                Pagamento.ValorBruto=valorbruto;
+                Pagamento.Desconto=desconto;
+                Pagamento.DataHora=date;
+                cliente.Pagamentos.Add(Pagamento);
+            }
+
+            if(opçao==2){
+
+                PagamentoCartão Pagamento= new PagamentoCartão();
+                Console.Write(" Digite uma descriçao");
+                string descricao = Console.ReadLine();
+                Console.Write(" Digite o Valor ");
+                double valorbruto = double.Parse(Console.ReadLine());
+                Console.Write(" Digite o Desconto ");
+                double desconto = double.Parse(Console.ReadLine());
+                DateTime date = DateTime.Now;
+                Pagamento.Descricao=descricao;
+                Pagamento.ValorBruto=valorbruto;
+                Pagamento.Desconto=desconto;
+                Pagamento.DataHora=date;
+                cliente.Pagamentos.Add(Pagamento);
+            }
+
+            
+    }
     public void RelatorioTreinadoresPorIdade()
     {
         System.Console.WriteLine("Digite um valor mínimo de idade:");
@@ -842,8 +889,9 @@ public class App
             Console.WriteLine("======================");
             Console.WriteLine("1. Incluir Cliente");
             Console.WriteLine("2. Remover Cliente");
-            Console.WriteLine("3. Voltar");
-            Console.Write("Escolha uma opção (1-3): ");
+            Console.WriteLine("3. Pagamento");
+            Console.WriteLine("4. Voltar");
+            Console.Write("Escolha uma opção (1-4): ");
 
             string opcao = Console.ReadLine()!;
 
@@ -858,6 +906,10 @@ public class App
                     RemoverCliente();
                     break;
                 case "3":
+                    Console.WriteLine("2. Pagamento");
+                    Pagamento();
+                    break;
+                case "4":
                     Console.WriteLine("3. Voltar");
                     voltar = true;
                     break;
