@@ -656,6 +656,29 @@ public class App
             
     }
 
+     private void VincularPlano()
+    {
+        
+        Console.WriteLine("===== Vincular Plano =====");
+            Console.WriteLine("Digite o CPF do clinete que vai vincular o plano:");
+            string CPF = Console.ReadLine();
+            Cliente cliente = pessoas.OfType<Cliente>().FirstOrDefault(c => c.Cpf == CPF);
+            if(cliente == null){
+                Console.WriteLine("Plano não encontrado");
+                return;
+            }
+            Console.WriteLine("Qual o titulo do plano que deseja vincular ao usuário? ");
+            string titulo = Console.ReadLine();
+
+            Plano plano = planos.FirstOrDefault(c => c.Titulo == titulo);
+
+            if(plano == null){
+                Console.WriteLine("Plano não encontrado");
+                return;
+            }
+            cliente.PlanoAtivo = plano;
+    }
+
     private void IncluirPlano()
     {
         Console.WriteLine($"Titulo do plano: ");
@@ -957,7 +980,8 @@ public class App
             Console.WriteLine("1. Incluir Cliente");
             Console.WriteLine("2. Remover Cliente");
             Console.WriteLine("3. Pagamento");
-            Console.WriteLine("4. Voltar");
+            Console.WriteLine("4. Vincular Plano a um ciente");
+            Console.WriteLine("5. Voltar");
             Console.Write("Escolha uma opção (1-4): ");
 
             string opcao = Console.ReadLine()!;
@@ -973,11 +997,15 @@ public class App
                     RemoverCliente();
                     break;
                 case "3":
-                    Console.WriteLine("2. Pagamento");
+                    Console.WriteLine("3. Pagamento");
                     Pagamento();
                     break;
                 case "4":
-                    Console.WriteLine("3. Voltar");
+                    Console.WriteLine("4. Pagamento");
+                    Pagamento();
+                    break;
+                case "5":
+                    Console.WriteLine("5. Voltar");
                     voltar = true;
                     break;
                 default:
